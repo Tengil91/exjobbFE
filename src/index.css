@@ -1,13 +1,94 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+.wrapper-inner {
+  max-width: 900px;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+}
+.wrapper-outer {
+  background-color: #000;
+  background-image: url(./chessLogo.png);
+  min-height: 100vh;
+}
+.nav {
+  background-color: #2C3374;
+  color: #fff;
+  font-size: 36px;
+}
+.nav a {
+  color: #fff;
+  text-decoration: none;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.p-5 {
+  padding: 5px;
+}
+.primary-button {
+  background-color: #2C3374;
+  color: #fff;
+}
+.standard-button {
+  padding: 5px;
+  border-radius: 20px;
+  border: none;
+  font-size: 36px;
+}
+.d-flex {
+  display: flex;
+}
+.occupied-room {
+  width: 30%;
+}
+.border {
+  border: 1px solid black;
+}
+.justify-space-between {
+  justify-content: space-between;
+}
+.justify-start {
+  justify-content: start;
+}
+.align-center {
+  align-items: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+.occupied-room p {
+  margin: 0;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.occupied-room p:last-child {
+  padding-bottom: 5px;
+}
+.occupied-room a {
+  text-decoration: none;
+  color: #000;
+}
+.nav-logo {
+  width: 40px;
+  height: 40px;
 }
