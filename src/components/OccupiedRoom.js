@@ -9,8 +9,9 @@ export default (props) => {
         <div className="w-100 h-100">
           <p>{`Rum ${room}`}</p>
           <p>
-            <span>{players[0]}</span>
-            {players.length === 2 && <span> <span>vs</span> <span>{players[1]}</span></span>} 
+            {players.white && <span>{players.white}</span>}
+            {players.black && players.white && <span> vs </span>}
+            {players.black && <span>{players.black}</span>} 
           </p>
         </div>
       </Link>

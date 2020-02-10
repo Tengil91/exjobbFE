@@ -1,5 +1,5 @@
 //importera actions
-import { REDIRECT_ACTION, SET_PLAYERS, SET_PLAYING, UPDATE_TABLE, UPDATE_LANDING_PAGE, REMOVE_REDIRECT } from '../actions/actions';
+import { REDIRECT_ACTION, SET_PLAYERS, SET_PLAYING, UPDATE_TABLE, UPDATE_LANDING_PAGE, REMOVE_REDIRECT, LOGIN } from '../actions/actions';
 
 //deklarera initialState
 let initialState = {
@@ -27,6 +27,12 @@ let rootReducer = (state = initialState, action) => {
         let newState = { ...state};
         delete newState.redirect;
         return newState;
+      case LOGIN:
+        return {
+          ...state,
+          loggedIn: action.loggedIn,
+          username: action.username
+        };
     default:
       return state;
   }

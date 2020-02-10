@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { setPlayers, setPlaying, updateTable } from '../redux/actions/actions'; 
 
 import Game from './Game';
-import MessageDisplayer from './MessageDisplayer';
 import PrimaryButton from './PrimaryButton';
 
 const mapStateToProps = state => ({
@@ -67,6 +66,12 @@ let GamePage = (props) => {
   });
   return (
     <div>
+      
+      <h3>
+        {props.white && <span>{props.white} (vit)</span>}
+        {props.black && props.white && <span> vs </span>}
+        {props.black && <span>{props.black} (svart)</span>} 
+      </h3>
       <Game  {...props} handleClick={props.atTable ? handlePlayerClick : () => {}} />
       {(props.white || props.atTable) ? '' : <PrimaryButton onClick={joinTableAsWhite}>Spela som vit</PrimaryButton>}
       {(props.black || props.atTable) ? '' : <PrimaryButton onClick={joinTableAsBlack}>Spela som svart</PrimaryButton>}
