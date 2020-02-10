@@ -4,6 +4,7 @@ export const SET_PLAYERS = 'SET_PLAYERS';
 export const SET_PLAYING = 'SET_PLAYING';
 export const UPDATE_TABLE = 'UPDATE_TABLE';
 export const UPDATE_LANDING_PAGE = 'UPDATE_LANDING_PAGE';
+export const LOGIN = 'LOGIN';
 
 export function redirectAction(redirect){
   return {
@@ -37,6 +38,12 @@ export function updateTable(data){
 export function updateLandingPage(data){
   return {
     type: UPDATE_LANDING_PAGE,
+    ...data
+  }
+}
+export function login(data){
+  return {
+    type: LOGIN,
     ...data
   }
 }

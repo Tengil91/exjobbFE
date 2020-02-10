@@ -26,6 +26,13 @@ body {
   color: #fff;
   text-decoration: none;
 }
+.nav .username {
+  font-size: 20px;
+  color: #ccf;
+}
+.ml-auto {
+  margin-left: auto;
+}
 .ml-20 {
   margin-left: 20px;
 }
@@ -35,11 +42,22 @@ body {
 .mb-20 {
   margin-bottom: 20px;
 }
+.mb-5 {
+  margin-bottom: 5px;
+}
 .p-5 {
   padding: 5px;
 }
 .primary-button {
   background-color: #2C3374;
+  color: #fff;
+  cursor: pointer;
+}
+nav .primary-button {
+  font-size: 22px;
+}
+.primary-button:hover {
+  background-color: rgb(71, 79, 151);
   color: #fff;
 }
 .standard-button {
@@ -91,4 +109,17 @@ body {
 .nav-logo {
   width: 40px;
   height: 40px;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
