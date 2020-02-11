@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { updateUserPage, UPDATE_USER_PAGE } from '../redux/actions/actions';
 import MatchHistory from './MatchHistory';
+import MessageDisplayer from './MessageDisplayer';
 
 const mapStateToProps = state => ({
   games: state.games,
@@ -20,14 +21,23 @@ let UserPage = (props) => {
       type: UPDATE_USER_PAGE
     });
   });
-  return (
+  if(props.points){
+    return (
+      <div>
+        <h3>Matchhistorik för {props.pageUsername} ({props.points})</h3>
+        {(props.games && props.games.length > 0) ? props.games.map(game => (
+          <MatchHistory game={game} />
+        )) : <p>{props.pageUsername} har inte spelat några matcher än.</p>}
+        <MessageDisplayer {...props} />
+      </div>
+    );
+  } else {
+    return (
     <div>
-      <h3>Matchhistorik för {props.username} ({props.points})</h3>
-      {(props.games && props.games.length > 0) ? props.games.map(game => (
-        <MatchHistory game={game} />
-      )) : `${props.username} har inte spelat några matcher än.`}
+      Det finns ingen användare "{props.pageUsername}" registrerad på sidan.
     </div>
-  );
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
