@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 
 import { redirectAction, login } from './redux/actions/actions';
 
-import GamePageContainer from './components/GamePageContainer';
 import Wrapper from './components/Wrapper';
+import GamePageContainer from './components/GamePageContainer';
 import LandingPageContainer from './components/LandingPageContainer';
+import UserPageContainer from './components/UserPageContainer';
+import UsersPageContainer from './components/UsersPageContainer';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 
@@ -28,6 +30,8 @@ function App(props) {
   socket.on('logged in', data => {
     console.log('logged in');
     console.log(data);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('username', data.username);
     props.login(data);
   });
   console.log('props');
@@ -38,7 +42,9 @@ function App(props) {
         {props.redirect && <Redirect to={`/${props.redirect.roomType}/${props.redirect.room}`} />}
         <Switch>
           <Route path='/' exact render={(props) => <LandingPageContainer {...props} socket={socket} />} />
-          <Route path='/games/:roomNumber' render={(props) => <GamePageContainer {...props} socket={socket} />} />
+          <Route path='/game/:roomNumber' render={(props) => <GamePageContainer {...props} socket={socket} />} />
+          <Route path='/user/:username' render={(props) => <UserPageContainer {...props} socket={socket} />} />
+          <Route path='/users/' render={(props) => <UsersPageContainer {...props} socket={socket} />} />
           {props.loggedIn ? '' : <Route path='/login' render={(props) => <LoginPage socket={socket} />} />}
           {props.loggedIn ? '' : <Route path='/register' render={(props) => <RegisterPage socket={socket} />} />}
           <Redirect to="/" />
