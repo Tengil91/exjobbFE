@@ -16,17 +16,19 @@ export default (props) => {
             <img src={logo} alt="logo" />
           </Link>
           <Link to="/" style={{display: 'block'}}>
-            <div className='ml-20'>Schack</div>
+            <div className='ml-20 nav-title'>Schack</div>
+          </Link>
+          <Link to="/users" style={{display: 'block'}} className='ml-auto'>
+            Användare
           </Link>
           {props.loggedIn ? (
             <>
-              
-              <span className='ml-auto username'>{props.username}</span>
+              <Link to={`/user/${props.username}`} className='ml-20 username'>{props.username}</Link>
               <PrimaryButton onClick={logout} className='ml-20'>Logga ut</PrimaryButton>
             </>
           ) : (
             <>
-              <PrimaryButtonLink to='/login' className='ml-auto'>Logga in</PrimaryButtonLink>
+              <PrimaryButtonLink to='/login' className='ml-20'>Logga in</PrimaryButtonLink>
               <PrimaryButtonLink to='/register' className='ml-20'>Registrera dig</PrimaryButtonLink>
             </>
           )}

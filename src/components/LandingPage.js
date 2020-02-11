@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { updateLandingPage, UPDATE_LANDING_PAGE } from '../redux/actions/actions';
-
 import PrimaryButton from './PrimaryButton';
 import OccupiedRooms from './OccupiedRooms';
+
+import { updateLandingPage, UPDATE_LANDING_PAGE } from '../redux/actions/actions';
 
 const mapStateToProps = state => ({
   rooms: state.rooms

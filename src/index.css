@@ -20,6 +20,12 @@ body {
 .nav {
   background-color: #2C3374;
   color: #fff;
+  font-size: 22px;
+}
+.nav .primary-button {
+  font-size: 22px;
+}
+.nav .nav-title {
   font-size: 36px;
 }
 .nav a {
@@ -27,7 +33,6 @@ body {
   text-decoration: none;
 }
 .nav .username {
-  font-size: 20px;
   color: #ccf;
 }
 .ml-auto {
@@ -122,4 +127,17 @@ nav .primary-button {
   border: 1px solid #ced4da;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.user-page-history {
+  padding: 10px 5px;
+  transition: 500ms;
+}
+.user-page-history:hover {
+  padding: 15px 5px;
+}
+.user-page-history.won-game:hover {
+  background-color: #afa;
+}
+.user-page-history.lost-game:hover {
+  background-color: #fcc;
 }

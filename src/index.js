@@ -8,9 +8,16 @@ import store from './redux/store/store';
 
 let io = require('socket.io-client');
 let socket = io(':3001');
-
+let token = localStorage.getItem('token');
+let username = localStorage.getItem('username');
 
 socket.on('connection', () => {
+  if(token && username){
+    socket.emit('login', {
+      token,
+      username
+    });
+  }
   ReactDOM.render(
     <Provider store={store}>
       <App socket={socket} />
