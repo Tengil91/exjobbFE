@@ -18,13 +18,13 @@ let UsersPage = (props) => {
     });
   });
   return (
-    <div>
+    <div className="p-5">
       <div className='d-flex justify-space-between'>
         <h3>Registrerade spelare</h3>
         <h3>Poäng</h3>
       </div>
       {props.users ? props.users.map((user, i) => (
-        <PlayerCard user={user} key={i} />
+        <PlayerCard user={user} i={i} key={i} />
       )) :'Inga registrerade spelare ännu'}
     </div>
   );

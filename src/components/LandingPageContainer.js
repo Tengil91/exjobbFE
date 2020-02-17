@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { removeRedirect } from '../redux/actions/actions';
-
 import LandingPage from './LandingPage';
 
 const mapStateToProps = null;
-const mapDispatchToProps = { removeRedirect };
+const mapDispatchToProps = null;
 
 let LandingPageContainer = (props) => {
   useEffect(() => {
@@ -14,9 +12,6 @@ let LandingPageContainer = (props) => {
     return () => {
       props.socket.emit('leave landing page', null);
     };
-  });
-  useEffect(() => {
-    removeRedirect();
   });
   return <LandingPage {...props} />
 }

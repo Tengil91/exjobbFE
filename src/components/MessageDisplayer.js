@@ -32,7 +32,7 @@ let UserWall = (props) => {
         <PrimaryButton>Skicka</PrimaryButton>
       </form>}
       {props.wall && props.wall.map((message, i) => (
-        <div key={i}>
+        <div key={i} className='border p-5 bg-white mt-5'>
           <p>{message.text}</p>
           <div className='d-flex justify-space-between'>
             <small>{message.username}</small>

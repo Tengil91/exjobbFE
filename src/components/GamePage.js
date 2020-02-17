@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setPlayers, setPlaying, updateTable } from '../redux/actions/actions'; 
 
@@ -14,14 +14,15 @@ const mapStateToProps = state => ({
   checkingPieces: state.checkingPieces,
   checkedKing: state.checkedKing,
   matt: state.matt,
-  pawnCrossing: state.pawnCrossing
+  pawnCrossing: state.pawnCrossing,
+  waitingToStartNewGame: state.waitingToStartNewGame
 });
 
 const mapDispatchToProps = { setPlayers, setPlaying, updateTable };
 
 let GamePage = (props) => {
   let socket = props.socket;
-  let boardLength = 500;
+  let boardLength = 300;
   let handlePlayerClick = (e) => {
     let rect = e.target.getBoundingClientRect();
     let x = Math.floor((e.clientX - rect.left) / boardLength * 8);
@@ -52,18 +53,26 @@ let GamePage = (props) => {
     };
     socket.emit('leave table', data);
   }
-  socket.on('table update', (data) => {
-    props.updateTable({
-      ...data,
-      type: 'UPDATE_TABLE'
+  useEffect(() => {
+    socket.on('table update', (data) => {
+      console.log('table update');
+      console.log(data);
+      props.updateTable({
+        ...data,
+        type: 'UPDATE_TABLE'
+      });
     });
-  });
-  socket.on('players at table', (data) => {
-    props.setPlayers({
-      ...data,
-      type: 'SET_PLAYERS'
+    socket.on('players at table', (data) => {
+      props.setPlayers({
+        ...data,
+        type: 'SET_PLAYERS'
+      });
     });
-  });
+    return () => {
+      socket.removeAllListeners('players at table');
+      socket.removeAllListeners('table update');
+    }
+  })
   return (
     <div>
       

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { updateUserPage, UPDATE_USER_PAGE } from '../redux/actions/actions';
@@ -13,22 +13,31 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { updateUserPage };
 
 let UserPage = (props) => {
-  props.socket.on('user page update', data => {
-    console.log('user page data:');
-    console.log(data);
-    props.updateUserPage({
-      ...data,
-      type: UPDATE_USER_PAGE
+  useEffect(() => {
+    props.socket.on('user page update', data => {
+      props.updateUserPage({
+        ...data,
+        type: UPDATE_USER_PAGE
+      });
     });
-  });
+    return () => {
+      props.socket.removeAllListeners('user page update')
+    }
+  })
   if(props.points){
     return (
       <div>
-        <h3>Matchhistorik för {props.pageUsername} ({props.points})</h3>
-        {(props.games && props.games.length > 0) ? props.games.map(game => (
-          <MatchHistory game={game} />
-        )) : <p>{props.pageUsername} har inte spelat några matcher än.</p>}
-        <MessageDisplayer {...props} />
+        <div>
+          <h3>Matchhistorik för {props.pageUsername} ({props.points})</h3>
+          {(props.games && props.games.length > 0) ? props.games.map((game, i) => (
+            <MatchHistory game={game} key={i} />
+          )) : <p>{props.pageUsername} har inte spelat några matcher än.</p>}
+        </div>
+        <hr />
+        <div>
+          <h3>Inlägg</h3>
+          <MessageDisplayer {...props} />
+        </div>
       </div>
     );
   } else {
