@@ -14,12 +14,17 @@ const mapDispatchToProps = { updateLandingPage };
 
 let LandingPage = (props) => {
   let socket = props.socket;
-  socket.on('landing page update', (data) => {
-    props.updateLandingPage({
-      ...data,
-      type: UPDATE_LANDING_PAGE
+  useEffect(() => {
+    socket.on('landing page update', (data) => {
+      props.updateLandingPage({
+        ...data,
+        type: UPDATE_LANDING_PAGE
+      });
     });
-  });
+    return () => {
+      socket.removeAllListeners('landing page update');
+    }
+  })
   return (
     <div>
       <PrimaryButton

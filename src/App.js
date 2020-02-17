@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { redirectAction, login } from './redux/actions/actions';
+import { redirectAction, login, registerErrorAction, loginErrorAction } from './redux/actions/actions';
 
 import Wrapper from './components/Wrapper';
 import GamePageContainer from './components/GamePageContainer';
@@ -15,25 +15,40 @@ import RegisterPage from './components/RegisterPage';
 const mapStateToProps = state => ({
   redirect: state.redirect,
   loggedIn: state.loggedIn,
-  username: state.username
+  username: state.username,
+  registerError: state.registerError
 });
 
-const mapDispatchToProps = { redirectAction, login };
+const mapDispatchToProps = { redirectAction, login, registerErrorAction, loginErrorAction };
 
 function App(props) {
   let socket = props.socket;
-  socket.on('room created', (data) => {
-    //redirecta till rummet
-    console.log(data);
-    props.redirectAction(data);
-  });
-  socket.on('logged in', data => {
-    console.log('logged in');
-    console.log(data);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('username', data.username);
-    props.login(data);
-  });
+  useEffect(() => {
+    socket.on('room created', (data) => {
+      props.redirectAction(data);
+    });
+    socket.on('logged in', data => {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('username', data.username);
+      props.login(data);
+    });
+    socket.on('register error', data => {
+      console.log('register error');
+      console.log(data);
+      props.registerErrorAction(data);
+    });
+    socket.on('login error', data => {
+      console.log('login error');
+      console.log(data);
+      props.loginErrorAction(data);
+    });
+    return () => {
+      socket.removeAllListeners('room created');
+      socket.removeAllListeners('logged in');
+      socket.removeAllListeners('register error');
+      socket.removeAllListeners('login error');
+    }
+  })
   console.log('props');
   console.log(props);
   return (

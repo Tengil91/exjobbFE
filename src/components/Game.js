@@ -87,7 +87,7 @@ class Chess extends React.Component {
       rookW: 'rookW'
     }
     this.props = props;
-    this.boardLength = 500;
+    this.boardLength = 300;
   }
 
   componentDidMount(){
@@ -163,10 +163,17 @@ class Chess extends React.Component {
       this.ctx.fillStyle = '#00000077';
       this.ctx.fillRect(0, 0, this.boardLength, this.boardLength);
       this.ctx.fillStyle = '#ffffff';
-      this.ctx.font = '36px Verdana';
+      this.ctx.font = '18px Verdana';
       this.ctx.textAlign = 'center';
       this.ctx.textBaseline = "middle";
-      this.ctx.fillText("Klicka för att start om", this.boardLength / 2, this.boardLength / 2);
+      if(this.props.atTable){
+        if(!this.props.waitingToStartNewGame){
+          this.ctx.fillText("Klicka för att start om", this.boardLength / 2, this.boardLength / 2);
+        } else {
+          this.ctx.fillText("Väntar på andra snubben", this.boardLength / 2, this.boardLength / 2);
+
+        }
+      }
     }
   }
 
@@ -220,8 +227,8 @@ class Chess extends React.Component {
       this.paintBoard();
     }
     return (
-      <div style={{height: this.boardLength}}>
-        <canvas onClick={this.props.handleClick} id="game-canvas" ></canvas>
+      <div style={{height: this.boardLength}} className="mb-5">
+        <canvas onClick={this.props.handleClick} id="game-canvas"></canvas>
       </div>
     );
   }

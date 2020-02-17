@@ -6,7 +6,7 @@ export default (props) => {
   return (
     <div className="border occupied-room mb-20">
       <Link to={`/game/${room}`}>
-        <div className="w-100 h-100">
+        <div className="w-100 h-100 bg-white">
           <p>{`Rum ${room}`}</p>
           <p>
             {players.white && <span>{players.white}</span>}

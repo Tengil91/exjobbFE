@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
+
 import { removeRedirect } from '../redux/actions/actions';
 
 import GamePage from './GamePage';
@@ -18,9 +19,6 @@ let GamePageContainer = (props) => {
     return () => {
       props.socket.emit('leave room', data);
     };
-  });
-  useEffect(() => {
-    removeRedirect();
   });
   return (
     <GamePage {...props} />
